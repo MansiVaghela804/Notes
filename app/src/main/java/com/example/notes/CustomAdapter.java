@@ -54,7 +54,6 @@ public class CustomAdapter extends BaseAdapter {
                 });
         String note = users.get(position);
         tv.setText(note);
-        btn.setText(note);
         return view;
     }
 }
