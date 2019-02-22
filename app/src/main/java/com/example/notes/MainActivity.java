@@ -3,10 +3,12 @@ package com.example.notes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,13 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     EditText note, description;
     DbHelper dbhelper;
-    ArrayList<String> ListItem;
-    ArrayAdapter adapter;
 
-    ListView listView;
-    Notes[] notes = new Notes[10];
-    String fnote;
-    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        DbHelper db = new DbHelper(this);
-//        listView = (ListView)findViewById(R.id.listview);
-//        listView.setEmptyView(findViewById(R.id.empty));
-//        ListAdapter adapter = new SimpleAdapter(MainActivity.this, userList, R.layout.list_raw,new String[]{"title","description"}, new int[]{R.id.title, R.id.description});
+        DbHelper db = new DbHelper(this);
+       ListView listView = findViewById(R.id.listview);
+//        ListViewAdapter adapter = new SimpleAdapter(MainActivity.this, userList, R.layout.list_raw,new String[]{"title","description"}, new int[]{R.id.title, R.id.description});
 //        listView.setAdapter(adapter);
     }
 }

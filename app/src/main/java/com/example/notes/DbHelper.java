@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DbHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "Db_Name";
@@ -44,5 +46,38 @@ public class DbHelper extends SQLiteOpenHelper {
                 new String[]{Notes.COLUMN_ID,Notes.COLUMN_NOTE,Notes.COLUMN_DESCRIPTION},
                 null,null,null,null,null);
         return cursor;
+    }
+    public int UpdateNote(Notes note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Notes.COLUMN_NOTE, note.getNote());
+        values.put(Notes.COLUMN_DESCRIPTION, note.getNote());
+        // updating row
+        return db.update(Notes.TABLE_NAME, values, Notes.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(note.getId())});
+    }
+
+    public void DeleteNote(Notes note) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(Notes.TABLE_NAME, Notes.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(note.getId())});
+        db.close();
+    }
+
+    public ArrayList<String> getNotes(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(Notes.TABLE_NAME,
+                new String[]{Notes.COLUMN_NOTE},
+                null,null,
+                null,null,null);
+
+        ArrayList<String> notes = new ArrayList<>();
+        while(cursor.moveToNext()){
+            String note = cursor.getString(cursor.getColumnIndex(Notes.COLUMN_NOTE));
+            notes.add(note);
+        }
+
+        return notes;
     }
 }
