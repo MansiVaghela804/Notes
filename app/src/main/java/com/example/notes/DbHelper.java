@@ -77,7 +77,7 @@ public class DbHelper extends SQLiteOpenHelper {
             String note = cursor.getString(cursor.getColumnIndex(Notes.COLUMN_NOTE));
             notes.add(note);
         }
-
         return notes;
+
     }
 }

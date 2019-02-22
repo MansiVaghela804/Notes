@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
                         notes.setDescription(Inflate_Description.getText().toString());
                         dbhelper.insertNote(notes);
                         Toast.makeText(context, "Note Save", Toast.LENGTH_SHORT).show();
+                        DbHelper db = new DbHelper(MainActivity.this);
+                        ListView listView = findViewById(R.id.listview);
+                        ArrayList<String> note = db.getNotes();
+                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,note);
+                        listView.setAdapter(adapter);
                     }
                 });
                 AlertDialog dialog = alert.create();
@@ -82,9 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        DbHelper db = new DbHelper(this);
-       ListView listView = findViewById(R.id.listview);
-//        ListViewAdapter adapter = new SimpleAdapter(MainActivity.this, userList, R.layout.list_raw,new String[]{"title","description"}, new int[]{R.id.title, R.id.description});
+//        DbHelper db = new DbHelper(this);
+//        String[] users = new String[]{"user 1", "user 2", "user 3"};
+//
+//        ListView listView = findViewById(R.id.listview);
+//        ArrayList<String> notes = db.getNotes();
+//        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
+//
 //        listView.setAdapter(adapter);
     }
 }

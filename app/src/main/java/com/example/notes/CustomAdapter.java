@@ -43,7 +43,8 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = ctx.getLayoutInflater().inflate(R.layout.row_single,null);
-        TextView tv = view.findViewById(R.id.mytext);
+        TextView tv1 = view.findViewById(R.id.mytitle);
+        TextView tv2 = view.findViewById(R.id.mydescription);
         final Button btn = view.findViewById(R.id.mybtn);
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -53,7 +54,8 @@ public class CustomAdapter extends BaseAdapter {
                     }
                 });
         String note = users.get(position);
-        tv.setText(note);
+        tv1.setText(note);
+        tv2.setText(note);
         btn.setText(note);
         return view;
     }
