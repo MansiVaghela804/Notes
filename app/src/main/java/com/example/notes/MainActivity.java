@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(context, "Note Save", Toast.LENGTH_SHORT).show();
                         DbHelper db = new DbHelper(MainActivity.this);
                         ListView listView = findViewById(R.id.listview);
-                        ArrayList<String> note = db.getNotes();
-                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,note);
+                        ArrayList<String> notes = db.getNotes();
+                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
                         listView.setAdapter(adapter);
                     }
                 });
