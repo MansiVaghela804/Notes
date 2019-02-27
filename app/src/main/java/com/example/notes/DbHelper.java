@@ -65,16 +65,18 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> getNotes(){
+    public ArrayList<Notes> getNotes(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(Notes.TABLE_NAME,
-                new String[]{Notes.COLUMN_NOTE},
+                new String[]{Notes.COLUMN_NOTE, Notes.COLUMN_DESCRIPTION},
                 null,null,
                 null,null,null);
 
-        ArrayList<String> notes = new ArrayList<>();
+        ArrayList<Notes> notes = new ArrayList<>();
         while(cursor.moveToNext()){
-            String note = cursor.getString(cursor.getColumnIndex(Notes.COLUMN_NOTE));
+            Notes note = new Notes();
+            note.setNote(cursor.getString(cursor.getColumnIndex(Notes.COLUMN_NOTE)));
+            note.setDescription(cursor.getString(cursor.getColumnIndex(Notes.COLUMN_DESCRIPTION)));
             notes.add(note);
         }
         return notes;

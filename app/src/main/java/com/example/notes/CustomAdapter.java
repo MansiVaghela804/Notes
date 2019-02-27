@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
 
-    public ArrayList<String> users;
+    public ArrayList<Notes> users;
     LayoutInflater inflater;
     Activity ctx;
 
-    CustomAdapter(Activity ctx, ArrayList<String> users){
+    CustomAdapter(Activity ctx, ArrayList<Notes> users){
         this.users = users;
         this.ctx = ctx;
     }
@@ -45,18 +45,24 @@ public class CustomAdapter extends BaseAdapter {
         View view = ctx.getLayoutInflater().inflate(R.layout.row_single,null);
         TextView tv1 = view.findViewById(R.id.mytitle);
         TextView tv2 = view.findViewById(R.id.mydescription);
-        final Button btn = view.findViewById(R.id.mybtn);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(ctx.getApplicationContext(),users.get(position),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-        String note = users.get(position);
-        tv1.setText(note);
-        tv2.setText(note);
-        btn.setText(note);
+        Notes note = users.get(position);
+
+        final String title = note.getNote();
+        String desc = note.getDescription();
+
+//        final Button btn = view.findViewById(R.id.mybtn);
+//                btn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(ctx.getApplicationContext(),title, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+        Notes note2 = users.get(position);
+        tv1.setText(title);
+        tv2.setText(desc);
+
+//        btn.setText(note);
         return view;
     }
 }

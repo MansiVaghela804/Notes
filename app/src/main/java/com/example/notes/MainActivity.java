@@ -3,6 +3,7 @@ package com.example.notes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     EditText note, description;
     DbHelper dbhelper;
-
+    ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbhelper  = new DbHelper(MainActivity.this);
-//        note = findViewById(R.id.editText);
-//        description = findViewById(R.id.editText2);
+        listview = findViewById(R.id.listview);
+
+        // Display data when activity starts
+        ArrayList<Notes> notes = dbhelper.getNotes();
+        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
+        listview.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
                         notes.setDescription(Inflate_Description.getText().toString());
                         dbhelper.insertNote(notes);
                         Toast.makeText(context, "Note Save", Toast.LENGTH_SHORT).show();
-                        DbHelper db = new DbHelper(MainActivity.this);
-                        ListView listView = findViewById(R.id.listview);
-                        ArrayList<String> notes = db.getNotes();
-                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
-                        listView.setAdapter(adapter);
+
+
+                        ArrayList<Notes> note2 = dbhelper.getNotes();
+                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,note2);
+                        listview.setAdapter(adapter);
                     }
                 });
                 AlertDialog dialog = alert.create();
@@ -88,13 +94,34 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-//        DbHelper db = new DbHelper(this);
-//        String[] users = new String[]{"user 1", "user 2", "user 3"};
+//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                if (position == 0) {
+//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
 //
-//        ListView listView = findViewById(R.id.listview);
-//        ArrayList<String> notes = db.getNotes();
-//        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
+//                if (position == 1) {
+//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity2.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
 //
-//        listView.setAdapter(adapter);
-    }
+//                if (position == 2) {
+//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
+//
+//                if (position == 3) {
+//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity2.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
+//
+//                if (position == 4) {
+//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
+//                    startActivityForResult(myIntent, 0);
+//                }
+//            }
+//        });
+      }
 }
