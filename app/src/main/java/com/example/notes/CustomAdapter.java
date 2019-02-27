@@ -50,19 +50,10 @@ public class CustomAdapter extends BaseAdapter {
         final String title = note.getNote();
         String desc = note.getDescription();
 
-//        final Button btn = view.findViewById(R.id.mybtn);
-//                btn.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Toast.makeText(ctx.getApplicationContext(),title, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
         Notes note2 = users.get(position);
         tv1.setText(title);
         tv2.setText(desc);
 
-//        btn.setText(note);
         return view;
     }
 }
