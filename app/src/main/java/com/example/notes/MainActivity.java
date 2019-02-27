@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Click action
+        //Click action
                 LayoutInflater inflater = getLayoutInflater();
                 View alertLayout = inflater.inflate(R.layout.inflate_activity, null);
                 final EditText Inflate_Title = alertLayout.findViewById(R.id.Inflate_Title);
