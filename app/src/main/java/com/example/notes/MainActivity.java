@@ -1,14 +1,15 @@
 package com.example.notes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private Context context = this;
-    private FloatingActionButton fab;
-    EditText note, description;
     DbHelper dbhelper;
     ListView listview;
 
@@ -28,19 +27,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbhelper  = new DbHelper(MainActivity.this);
+        dbhelper = new DbHelper(MainActivity.this);
         listview = findViewById(R.id.listview);
 
         // Display data when activity starts
-        ArrayList<Notes> notes = dbhelper.getNotes();
-        CustomAdapter adapter = new CustomAdapter(MainActivity.this,notes);
+        final ArrayList<Notes> notes = dbhelper.getNotes();
+        CustomAdapter adapter = new CustomAdapter(MainActivity.this, notes);
         listview.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //Click action
+                //Click action
                 LayoutInflater inflater = getLayoutInflater();
                 View alertLayout = inflater.inflate(R.layout.inflate_activity, null);
                 final EditText Inflate_Title = alertLayout.findViewById(R.id.Inflate_Title);
@@ -69,45 +68,88 @@ public class MainActivity extends AppCompatActivity {
                         dbhelper.insertNote(notes);
                         Toast.makeText(context, "Note Save", Toast.LENGTH_SHORT).show();
 
-
                         ArrayList<Notes> note2 = dbhelper.getNotes();
-                        CustomAdapter adapter = new CustomAdapter(MainActivity.this,note2);
+                        CustomAdapter adapter = new CustomAdapter(MainActivity.this, note2);
                         listview.setAdapter(adapter);
                     }
                 });
                 AlertDialog dialog = alert.create();
                 dialog.show();
-
             }
         });
-//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                if (position == 0) {
-//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//
-//                if (position == 1) {
-//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity2.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//
-//                if (position == 2) {
-//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//
-//                if (position == 3) {
-//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity2.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//
-//                if (position == 4) {
-//                    Intent myIntent = new Intent(view.getContext(), ListItemActivity1.class);
-//                    startActivityForResult(myIntent, 0);
-//                }
-//            }
-//        });
-      }
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                if (position == 0) {
+                   AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Item");
+                    builder.setMessage("Edit Profile");
+                    builder.setPositiveButton("Edit",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.show();
+                }
+
+                if (position == 1) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Item");
+                    builder.setMessage("Edit Profile");
+                    builder.setPositiveButton("Edit",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,
+                                                    int which) {
+                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_LONG).show();
+                                }
+                            });
+                    builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    builder.show();
+                }
+
+                if (position == 2) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
+                if (position == 3) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
+                if (position == 4) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
+                if (position == 5) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
+                if (position == 6) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+
+                if (position == 7) {
+                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
+                    startActivityForResult(myIntent, 0);
+                }
+            }
+        });
+    }
 }
