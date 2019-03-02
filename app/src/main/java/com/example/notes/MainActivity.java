@@ -80,75 +80,31 @@ public class MainActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if (position == 0) {
-                   AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("Item");
-                    builder.setMessage("Edit Profile");
-                    builder.setPositiveButton("Edit",
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Edit Note");
+                    builder.setMessage("Choose option");
+                    builder.setPositiveButton("Update",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,
                                                     int which) {
-                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),"Update Data Sucessfully",Toast.LENGTH_LONG).show();
                                 }
                             });
-                    builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("Delete",new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+
                         }
                     });
+                builder.setNeutralButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show();
+                    }
+                });
                     builder.show();
-                }
-
-                if (position == 1) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("Item");
-                    builder.setMessage("Edit Profile");
-                    builder.setPositiveButton("Edit",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    Toast.makeText(getApplicationContext(),"Edit",Toast.LENGTH_LONG).show();
-                                }
-                            });
-                    builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    builder.show();
-                }
-
-                if (position == 2) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (position == 3) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (position == 4) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (position == 5) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (position == 6) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
-
-                if (position == 7) {
-                    Intent myIntent = new Intent(view.getContext(), Listitem1Activity.class);
-                    startActivityForResult(myIntent, 0);
-                }
             }
         });
     }
